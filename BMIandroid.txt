@@ -1,0 +1,49 @@
+package com.example.bmi;
+
+import androidx.appcompat.app.AppCompatActivity;
+
+import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.TextView;
+
+public class MainActivity extends AppCompatActivity {
+    EditText wtBox,htBox;
+    TextView Result;
+    Button calBtn;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+        wtBox=findViewById(R.id.wtBox);
+        htBox=findViewById(R.id.htBox);
+        calBtn=findViewById(R.id.calBtn);
+        Result=findViewById(R.id.Result);
+        calBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Float height=Float.parseFloat(wtBox.getText().toString());
+                Float weight=Float.parseFloat(htBox.getText().toString())/100;
+                Float result=weight/(height*height);
+                if(result<18.5)
+                {
+                    Result.setText(result+"\nUnderweight");
+                }
+                else if(result>=18.5 && result<24.9)
+                {
+                    Result.setText(result+"\nHealthy");
+                }
+                else if(result>=24.9 && result<30)
+                {
+                    Result.setText(result+"\nOverweight");
+                }
+                else
+                {
+                    Result.setText(result+"\nMy Dude is Obese");
+                }
+            }
+        });
+    }
+}
